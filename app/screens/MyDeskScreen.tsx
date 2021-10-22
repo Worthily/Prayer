@@ -7,7 +7,7 @@ import styles from '../styles/screens/MyDeskScreenStyles';
 import Column from '../components/Column/';
 import SvgImg from '../assets/svg/add.svg';
 import { useSelector } from 'react-redux';
-import { DASHBOARD } from '../navigations/constants';
+import { DASHBOARD, CREATECOLUMN } from '../navigations/constants';
 
 function MyDeskScreen() {
   const navigation = useNavigation<authScreenProp>();
@@ -18,6 +18,7 @@ function MyDeskScreen() {
     return (
       <Column
         key={item.id}
+        id={item.id}
         title={item.title}
         onPress={() => {
           navigation.navigate(DASHBOARD, { id: item.id });
@@ -32,6 +33,7 @@ function MyDeskScreen() {
         <Pressable
           onPress={() => {
             console.log('plus');
+            navigation.navigate(CREATECOLUMN);
           }}>
           <SvgImg width="16" height="16" />
         </Pressable>

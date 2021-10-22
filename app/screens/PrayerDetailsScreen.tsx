@@ -14,10 +14,7 @@ import { useSelector } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import CommentTextInput from '../components/CommentTextInput';
 import { useDispatch } from 'react-redux';
-import {
-  deleteCommentActionCreator,
-  requestCreateCommentActionCreator,
-} from '../store/saga/Comments/actions';
+import { requestCreateCommentActionCreator } from '../store/saga/Comments/actions';
 
 function PrayerDetails() {
   const navigation = useNavigation<authScreenProp>();
@@ -50,6 +47,7 @@ function PrayerDetails() {
         body: formState.body,
       }),
     );
+    setFormState({ body: '' });
   }
 
   return (

@@ -6,4 +6,5 @@ export const {
   requestSignIn: requestSignInActionCreator,
   requestSignUp: requestSignUpActionCreator,
   onError: onErrorActionCreator,
+  logOut: logOutActionCreator,
 } = userSlice.actions;

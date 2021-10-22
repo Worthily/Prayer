@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginBottom: 10,
   },
+  columnSwipeout: {
+    backgroundColor: '#ffffff',
+    borderRadius: 4,
+  },
   columnTitle: {
     paddingVertical: 20,
     paddingHorizontal: 15,

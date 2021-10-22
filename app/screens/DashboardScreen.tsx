@@ -7,10 +7,12 @@ import styles from '../styles/screens/DashboardScreenStyles';
 import SettingsSvg from '../assets/svg/settings.svg';
 import CreatePrayerForm from '../components/CreatePrayerForm';
 import PrayerList from '../components/PrayerList';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logOutActionCreator } from '../store/saga/User/actions';
 
 function DashboardScreen() {
   const navigation = useNavigation<appScreenProp>();
+  const dispatch = useDispatch();
   const [tabToShow, setTabToShow] = useState('My prayers');
   const prayersData = useSelector((state: State) => state.prayers);
   const route = useRoute<DashboardRouteProps>();
@@ -55,7 +57,7 @@ function DashboardScreen() {
           <Pressable
             style={styles.settingsBtn}
             onPress={() => {
-              console.log('settings');
+              dispatch(logOutActionCreator());
             }}>
             <SettingsSvg width="24" height="24" />
           </Pressable>

@@ -1,17 +1,19 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
+  deleteColumnActionCreator,
+  requestCreateColumnActionCreator,
   requestGetColumnsActionCreator,
+  responseCreateColumnActionCreator,
   responseGetColumnsActionCreator,
 } from '../Columns/actions';
-// import { signIn, signUp } from '../../../api/user/requests';
-// import { UserSignUp } from '../../../types';
-import { getColumns } from '../../../api/Columns/requests';
+import {
+  createColumnWorkSaga,
+  deleteColumnWorkSaga,
+  getColumnsWorkSaga,
+} from './workers';
 
-export function* getColumnsWatchSaga() {
-  const { data } = yield call(getColumns);
-  console.log('columns>>>' + ' ' + data);
-  yield put({
-    type: responseGetColumnsActionCreator.type,
-    payload: data,
-  });
+export function* columnsWatchSaga() {
+  yield takeLatest(requestGetColumnsActionCreator, getColumnsWorkSaga);
+  yield takeLatest(deleteColumnActionCreator, deleteColumnWorkSaga);
+  yield takeLatest(requestCreateColumnActionCreator, createColumnWorkSaga);
 }

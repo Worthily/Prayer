@@ -20,6 +20,7 @@ function CreatePrayerForm(props: { columnId: number }) {
         description: '',
       }),
     );
+    setFormState({ title: '' });
   }
 
   return (
@@ -33,6 +34,7 @@ function CreatePrayerForm(props: { columnId: number }) {
           <View>
             <Field
               name="title"
+              value={formState.title}
               component={CreatePrayerInput}
               placeholder="Add a prayer"
               style={styles.createPrayerInput}

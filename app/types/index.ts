@@ -7,6 +7,7 @@ export type RootStackParamList = {
   PrayerDetails: { id: number };
   SignIn: undefined;
   SignUp: undefined;
+  CreateColumn: undefined;
 };
 export type authScreenProp = StackNavigationProp<RootStackParamList, 'SignIn'>;
 export type appScreenProp = StackNavigationProp<RootStackParamList, 'MyDesk'>;
