@@ -1,6 +1,11 @@
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { DASHBOARD, PRAYERDETAILS } from '../navigations/constants';
+import {
+  DASHBOARD,
+  PRAYERDETAILS,
+  UPDATECOLUMN,
+  UPDATEPRAYER,
+} from '../navigations/constants';
 export type RootStackParamList = {
   MyDesk: undefined;
   Dashboard: { id: number };
@@ -8,6 +13,8 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   CreateColumn: undefined;
+  UpdateColumn: { id: number };
+  UpdatePrayer: { id: number; columnId: number };
 };
 export type authScreenProp = StackNavigationProp<RootStackParamList, 'SignIn'>;
 export type appScreenProp = StackNavigationProp<RootStackParamList, 'MyDesk'>;
@@ -26,6 +33,15 @@ export type DashboardRouteProps = RouteProp<
 export type PrayerDetailsRouteProps = RouteProp<
   RootStackParamList,
   typeof PRAYERDETAILS
+>;
+
+export type UpdateColumnRouteProps = RouteProp<
+  RootStackParamList,
+  typeof UPDATECOLUMN
+>;
+export type UpdatePrayerRouteProps = RouteProp<
+  RootStackParamList,
+  typeof UPDATEPRAYER
 >;
 
 export type UserSignIn = {

@@ -5,5 +5,6 @@ export const {
   responseGetColumns: responseGetColumnsActionCreator,
   requestCreateColumn: requestCreateColumnActionCreator,
   responseCreateColumn: responseCreateColumnActionCreator,
+  updateColumnTitle: updateColumnTitleActionCreator,
   deleteColumn: deleteColumnActionCreator,
 } = columnsSlice.actions;

@@ -8,10 +8,10 @@ interface AuthInput extends FieldRenderProps<string> {
   value: string;
 }
 
-const CreateColumnInput: React.FC<AuthInput> = (props) => {
+const ColumnInput: React.FC<AuthInput> = (props) => {
   return (
     <TextInput
-      placeholder="Column title"
+      placeholder="Prayer title"
       value={props.value}
       style={styles.createPrayerInput}
       onChangeText={(text: string) => {
@@ -21,4 +21,4 @@ const CreateColumnInput: React.FC<AuthInput> = (props) => {
   );
 };
 
-export default CreateColumnInput;
+export default ColumnInput;

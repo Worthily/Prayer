@@ -12,7 +12,6 @@ import { DASHBOARD, CREATECOLUMN } from '../navigations/constants';
 function MyDeskScreen() {
   const navigation = useNavigation<authScreenProp>();
   const columnsData = useSelector((state: State) => state.columns);
-  // console.log('columnsStateGot>>>' + ' ' + columnsData2[0].id);
 
   const columns: JSX.Element[] = columnsData.map((item) => {
     return (

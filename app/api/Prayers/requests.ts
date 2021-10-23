@@ -45,6 +45,16 @@ export async function setPrayerIsChecked(
     });
 }
 
+export async function updatePrayer(id: number, title: string) {
+  console.log('prayer update start');
+  return await api
+    .put(`${PRAYERS_LINK}/${id}`, { title: title, description: '' })
+    .catch((error) => {
+      console.log('Prayers update error');
+      return error;
+    });
+}
+
 export async function deletePrayer(id: number) {
   console.log('prayers req start');
   return await api.delete(`${PRAYERS_LINK}/${id}`).catch((error) => {

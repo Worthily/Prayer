@@ -4,11 +4,13 @@ import {
   requestCreateColumnActionCreator,
   responseCreateColumnActionCreator,
   responseGetColumnsActionCreator,
+  updateColumnTitleActionCreator,
 } from '../Columns/actions';
 import {
   createColumn,
   deleteColumn,
   getColumns,
+  updateColumn,
 } from '../../../api/Columns/requests';
 
 export function* getColumnsWorkSaga() {
@@ -40,5 +42,12 @@ export function* deleteColumnWorkSaga({
   payload,
 }: ReturnType<typeof deleteColumnActionCreator>) {
   const { data } = yield call(deleteColumn, payload.id);
+  console.log('columns>>>' + ' ' + data);
+}
+
+export function* updateColumnTitleWorkSaga({
+  payload,
+}: ReturnType<typeof updateColumnTitleActionCreator>) {
+  const { data } = yield call(updateColumn, payload.id, payload.title);
   console.log('columns>>>' + ' ' + data);
 }

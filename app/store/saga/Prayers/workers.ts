@@ -4,6 +4,7 @@ import {
   deletePrayer,
   getPrayers,
   setPrayerIsChecked,
+  updatePrayer,
 } from '../../../api/Prayers/requests';
 import {
   requestCreatePrayerActionCreator,
@@ -11,6 +12,7 @@ import {
   responseCreatePrayerActionCreator,
   setPrayerCheckedActionCreator,
   deletePrayerActionCreator,
+  updatePrayerTitleActionCreator,
 } from './actions';
 
 export function* getPrayersWorkSaga() {
@@ -46,6 +48,12 @@ export function* createPrayerWorkSaga({
   } else {
     console.log('create prayer error');
   }
+}
+export function* updatePrayerTitleWorkSaga({
+  payload,
+}: ReturnType<typeof updatePrayerTitleActionCreator>) {
+  const { data } = yield call(updatePrayer, payload.id, payload.title);
+  console.log('prayers>>>' + ' ' + data);
 }
 
 export function* setPrayerCheckedWorkSaga({

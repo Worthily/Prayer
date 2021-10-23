@@ -21,6 +21,20 @@ export const columnsSlice = createSlice({
       const newColumns = [...state, payload];
       return newColumns;
     },
+    updateColumnTitle: (
+      state,
+      { payload }: PayloadAction<{ id: number; title: string }>,
+    ) => {
+      if (payload.title.trim()) {
+        const newColumns = state.map((column) => {
+          if (column.id === payload.id) {
+            return { ...column, title: payload.title };
+          }
+          return column;
+        });
+        return newColumns;
+      }
+    },
     deleteColumn: (state, { payload }: PayloadAction<{ id: number }>) => {
       let newColumns: Columns[] = state.filter((item) => {
         return item.id !== payload.id;

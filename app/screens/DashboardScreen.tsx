@@ -33,6 +33,7 @@ function DashboardScreen() {
     <View>
       <CreatePrayerForm columnId={route.params.id} />
       <PrayerList
+        columnId={route.params.id}
         checkedPrayers={checkedPrayers}
         uncheckedPrayers={uncheckedPrayers}
       />
@@ -42,6 +43,7 @@ function DashboardScreen() {
     dashboardBody = (
       <View>
         <PrayerList
+          columnId={route.params.id}
           checkedPrayers={checkedPrayers}
           uncheckedPrayers={uncheckedPrayers}
         />

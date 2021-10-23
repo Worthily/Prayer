@@ -62,6 +62,20 @@ export const prayersSlice = createSlice({
       });
       return newPrayers;
     },
+    updatePrayerTitle: (
+      state,
+      { payload }: PayloadAction<{ id: number; title: string }>,
+    ) => {
+      if (payload.title.trim()) {
+        const newPrayers = state.map((prayer) => {
+          if (prayer.id === payload.id) {
+            return { ...prayer, title: payload.title };
+          }
+          return prayer;
+        });
+        return newPrayers;
+      }
+    },
     deletePrayer: (state, { payload }: PayloadAction<{ id: number }>) => {
       let newPrayers: Prayers[] = state.filter((item) => {
         return item.id !== payload.id;

@@ -18,7 +18,7 @@ api.interceptors.request.use((axiosCfg) => {
     axiosCfg.headers!.Authorization = `Bearer ${token}`;
     return axiosCfg;
   } catch {
-    axiosCfg.headers!.Authorization = `Bearer a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3`;
+    axiosCfg.headers!.Authorization = `Bearer `;
     return axiosCfg;
   }
 });

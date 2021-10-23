@@ -3,11 +3,13 @@ import {
   requestCreatePrayerActionCreator,
   setPrayerCheckedActionCreator,
   deletePrayerActionCreator,
+  updatePrayerTitleActionCreator,
 } from './actions';
 import {
   createPrayerWorkSaga,
   deletePrayerWorkSaga,
   setPrayerCheckedWorkSaga,
+  updatePrayerTitleWorkSaga,
 } from './workers';
 
 export function* prayerWatchSaga() {
@@ -16,5 +18,6 @@ export function* prayerWatchSaga() {
     setPrayerCheckedActionCreator.type,
     setPrayerCheckedWorkSaga,
   );
+  yield takeLatest(updatePrayerTitleActionCreator, updatePrayerTitleWorkSaga);
   yield takeLatest(deletePrayerActionCreator.type, deletePrayerWorkSaga);
 }

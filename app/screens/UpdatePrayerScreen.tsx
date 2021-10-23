@@ -1,34 +1,36 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { authScreenProp } from '../types';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { appScreenProp, UpdatePrayerRouteProps } from '../types';
 import styles from '../styles/screens/CreateColumnScreenStyles';
 import { Form, Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import CreateColumnInput from '../components/ColumnInput';
-import { requestCreateColumnActionCreator } from '../store/saga/Columns/actions';
-import { MYDESK } from '../navigations/constants';
+import { DASHBOARD } from '../navigations/constants';
+import UpdatePrayerInput from '../components/UpdatePrayerInput';
+import { updatePrayerTitleActionCreator } from '../store/saga/Prayers/actions';
 
-function CreateColumnScreen() {
-  const navigation = useNavigation<authScreenProp>();
+function UpdatePrayerScreen() {
+  const navigation = useNavigation<appScreenProp>();
   const dispatch = useDispatch();
   const [formState, setFormState] = useState({ title: '' });
+  const route = useRoute<UpdatePrayerRouteProps>();
 
   function onSubmit() {
-    console.log('clicked add prauer ' + formState.title);
+    console.log('clicked update column ' + formState.title);
     dispatch(
-      requestCreateColumnActionCreator({
+      updatePrayerTitleActionCreator({
+        id: route.params.id,
         title: formState.title,
       }),
     );
     setFormState({ title: '' });
-    navigation.navigate(MYDESK);
+    navigation.navigate(DASHBOARD, { id: route.params.columnId });
   }
 
   return (
     <View style={styles.createColumnWrapper}>
-      <Text style={styles.createColumnScreenTitle}>Create column</Text>
+      <Text style={styles.createColumnScreenTitle}>Update prayer</Text>
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit }) => (
@@ -36,7 +38,7 @@ function CreateColumnScreen() {
             <Field
               name="title"
               value={formState.title}
-              component={CreateColumnInput}
+              component={UpdatePrayerInput}
               onChangeText={(val: string) => {
                 setFormState({ title: val });
               }}
@@ -53,4 +55,4 @@ function CreateColumnScreen() {
   );
 }
 
-export default CreateColumnScreen;
+export default UpdatePrayerScreen;
