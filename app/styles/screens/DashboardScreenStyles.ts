@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   screenTitle: {
+    fontFamily: 'SFUIText-Medium',
     marginVertical: 22,
     fontSize: 17,
     lineHeight: 20,
@@ -43,16 +44,20 @@ const styles = StyleSheet.create({
     color: '#72A8BC',
   },
   screenTabText: {
+    fontFamily: 'SFUIText-Medium',
     color: '#C8C8C8',
   },
   activeScreenTabText: {
+    fontFamily: 'SFUIText-Medium',
     color: '#72A8BC',
   },
   createPrayerInput: {
+    fontFamily: 'SFUIText-Regular',
     paddingVertical: 15,
     fontSize: 17,
   },
   createPrayerBtn: {
+    fontFamily: 'SFUIText-Regular',
     marginHorizontal: 14,
   },
 });

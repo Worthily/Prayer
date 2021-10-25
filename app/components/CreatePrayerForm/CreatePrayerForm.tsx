@@ -12,14 +12,16 @@ function CreatePrayerForm(props: { columnId: number }) {
   const [formState, setFormState] = useState({ title: '' });
 
   function onSubmit() {
-    console.log('clicked add prauer ' + formState.title + ' ' + props.columnId);
-    dispatch(
-      requestCreatePrayerActionCreator({
-        columnId: props.columnId,
-        title: formState.title,
-        description: '',
-      }),
-    );
+    if (formState.title.trim() !== '') {
+      dispatch(
+        requestCreatePrayerActionCreator({
+          columnId: props.columnId,
+          title: formState.title,
+          description: '',
+        }),
+      );
+      setFormState({ title: '' });
+    }
   }
 
   return (
@@ -33,6 +35,7 @@ function CreatePrayerForm(props: { columnId: number }) {
           <View>
             <Field
               name="title"
+              value={formState.title}
               component={CreatePrayerInput}
               placeholder="Add a prayer"
               style={styles.createPrayerInput}

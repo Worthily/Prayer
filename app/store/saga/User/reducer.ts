@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { user, UserSignIn, UserSignUp } from '../../../types';
+import { User, UserSignIn, UserSignUp } from '../../../types';
 
-const userInitialState: user = {
+const userInitialState: User = {
   id: '',
   email: '',
   name: '',
@@ -60,6 +60,9 @@ export const userSlice = createSlice({
       state.email = payload.userEmail;
       state.name = payload.userName;
       state.pass = payload.userPass;
+    },
+    logOut: (state) => {
+      return userInitialState;
     },
     onError: (
       state,

@@ -9,7 +9,6 @@ export const prayersSlice = createSlice({
   reducers: {
     requestGetPrayers: (state) => {},
     responseGetPrayers: (state, { payload }: PayloadAction<Prayers[]>) => {
-      // console.log('columnsState>>>' + ' ' + payload);
       return [...payload];
     },
     requestCreatePrayer: (
@@ -21,9 +20,7 @@ export const prayersSlice = createSlice({
         title: string;
         description: string;
       }>,
-    ) => {
-      console.log('create prayer req');
-    },
+    ) => {},
     responseCreatePrayer: (
       state,
       {
@@ -36,7 +33,6 @@ export const prayersSlice = createSlice({
         checked: boolean;
       }>,
     ) => {
-      console.log('create prayer resp');
       const newPrayer: Prayers = {
         id: payload.id,
         title: payload.title,
@@ -61,6 +57,20 @@ export const prayersSlice = createSlice({
         return item;
       });
       return newPrayers;
+    },
+    updatePrayerTitle: (
+      state,
+      { payload }: PayloadAction<{ id: number; title: string }>,
+    ) => {
+      if (payload.title.trim()) {
+        const newPrayers = state.map((prayer) => {
+          if (prayer.id === payload.id) {
+            return { ...prayer, title: payload.title };
+          }
+          return prayer;
+        });
+        return newPrayers;
+      }
     },
     deletePrayer: (state, { payload }: PayloadAction<{ id: number }>) => {
       let newPrayers: Prayers[] = state.filter((item) => {

@@ -32,7 +32,7 @@ function Comment(props: { id: number; commentText: string; imgUrl: string }) {
         <View style={styles.textWrapper}>
           <View style={styles.commentTitle}>
             <Text style={styles.userName}>unknown</Text>
-            <Text style={styles.commentTime}>2 fucking years ago</Text>
+            <Text style={styles.commentTime}>2 years ago</Text>
           </View>
           <View style={styles.commentTextWrapper}>
             <Text style={styles.commentsText}>{props.commentText}</Text>

@@ -10,6 +10,9 @@ import {
   setPrayerCheckedActionCreator,
 } from '../../store/saga/Prayers/actions';
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { appScreenProp } from '../../types';
+import { UPDATEPRAYER } from '../../navigations/constants';
 
 function Prayer(props: {
   id: number;
@@ -17,7 +20,9 @@ function Prayer(props: {
   description: string;
   checked: boolean;
   onPress(): void;
+  columnId: number;
 }) {
+  const navigation = useNavigation<appScreenProp>();
   const [prayerIsChecked, setPrayerIsChecked] = useState(props.checked);
   const dispatch = useDispatch();
   let titleToShow = props.title;
@@ -25,19 +30,28 @@ function Prayer(props: {
     titleToShow = titleToShow.slice(0, 15) + '...';
   }
 
-  const dellBtn = [
+  const buttons = [
+    {
+      text: 'Update',
+      backgroundColor: '#BFB393',
+      onPress: () => {
+        navigation.navigate(UPDATEPRAYER, {
+          id: props.id,
+          columnId: props.columnId,
+        });
+      },
+    },
     {
       text: 'Delete',
       backgroundColor: '#AC5253',
       onPress: () => {
-        console.log('dell');
         dispatch(deletePrayerActionCreator({ id: props.id }));
       },
     },
   ];
 
   return (
-    <Swipeout right={dellBtn}>
+    <Swipeout right={buttons}>
       <Pressable
         onPress={() => {
           props.onPress();

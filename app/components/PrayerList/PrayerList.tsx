@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import styles from '../../styles/components/PrayerListStyles';
-import { authScreenProp, PrayerDetailsRouteProps, Prayers } from '../../types';
+import { appScreenProp, PrayerDetailsRouteProps, Prayers } from '../../types';
 import Prayer from '../Prayer';
 import Swipeout from 'react-native-swipeout';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { PRAYERDETAILS } from '../../navigations/constants';
 
 function PrayerList(props: {
+  columnId: number;
   checkedPrayers: (Prayers | undefined)[];
   uncheckedPrayers: (Prayers | undefined)[];
 }) {
   const [answeredPrayersShowed, setAnsweredPrayersShowed] = useState(false);
-  const navigation = useNavigation<authScreenProp>();
+  const navigation = useNavigation<appScreenProp>();
 
   let hideShowAnsweredPrayersText = 'SHOW ANSWERED PRAYERS';
   if (answeredPrayersShowed) {
@@ -26,6 +27,7 @@ function PrayerList(props: {
           <Prayer
             key={item.id}
             id={item.id}
+            columnId={props.columnId}
             title={item.title}
             description={item.description}
             checked={item.checked}
@@ -46,6 +48,7 @@ function PrayerList(props: {
           <Prayer
             key={item.id}
             id={item.id}
+            columnId={props.columnId}
             title={item.title}
             description={item.description}
             checked={item.checked}

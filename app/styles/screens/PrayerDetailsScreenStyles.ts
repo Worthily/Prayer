@@ -18,13 +18,12 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     paddingBottom: 15,
   },
-  goBackBtn: {},
-  prayerBtn: {},
   titleWrapper: {
     paddingBottom: 23,
     paddingHorizontal: 15,
   },
   title: {
+    fontFamily: 'SFUIText-Medium',
     fontSize: 20,
     lineHeight: 30,
     color: '#fff',
@@ -42,6 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   lastPrayedText: {
+    fontFamily: 'SFUIText-Regular',
     marginLeft: 10,
     fontSize: 17,
   },
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   dateAddedValue: {
+    fontFamily: 'SFUIText-Regular',
     color: '#BFB393',
     fontSize: 22,
     lineHeight: 25,
@@ -81,11 +82,13 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   timesPrayedTotalValue: {
+    fontFamily: 'SFUIText-Regular',
     color: '#BFB393',
     fontSize: 32,
     lineHeight: 37,
   },
   timesPrayedTotalLable: {
+    fontFamily: 'SFUIText-Regular',
     fontSize: 13,
   },
   timesPrayed: {
@@ -96,11 +99,13 @@ const styles = StyleSheet.create({
     paddingVertical: 27,
   },
   timesPrayedValue: {
+    fontFamily: 'SFUIText-Regular',
     color: '#BFB393',
     fontSize: 32,
     lineHeight: 37,
   },
   timesPrayedLable: {
+    fontFamily: 'SFUIText-Regular',
     fontSize: 13,
   },
   membersWrapper: {
@@ -109,6 +114,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   membersTitle: {
+    fontFamily: 'SFUIText-Medium',
     color: '#72A8BC',
     fontSize: 13,
   },
@@ -132,6 +138,7 @@ const styles = StyleSheet.create({
   },
   commentsBody: {},
   commentsTitle: {
+    fontFamily: 'SFUIText-Medium',
     color: '#72A8BC',
     fontSize: 13,
     marginLeft: 15,
@@ -151,6 +158,8 @@ const styles = StyleSheet.create({
   commentsInput: {
     marginLeft: 12,
   },
+  goBackBtn: {},
+  prayerBtn: {},
 });
 
 export default styles;

@@ -2,7 +2,10 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  contentWrapper: {},
+  contentWrapper: {
+    backgroundColor: '#ffffff',
+    height: '100%',
+  },
   header: {
     borderBottomColor: '#E5E5E5',
     borderBottomWidth: 1,
@@ -12,6 +15,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   screenTitle: {
+    fontFamily: 'SFUIText-Medium',
     marginVertical: 22,
     fontSize: 17,
     lineHeight: 20,

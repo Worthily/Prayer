@@ -14,10 +14,7 @@ import { useSelector } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import CommentTextInput from '../components/CommentTextInput';
 import { useDispatch } from 'react-redux';
-import {
-  deleteCommentActionCreator,
-  requestCreateCommentActionCreator,
-} from '../store/saga/Comments/actions';
+import { requestCreateCommentActionCreator } from '../store/saga/Comments/actions';
 
 function PrayerDetails() {
   const navigation = useNavigation<authScreenProp>();
@@ -28,6 +25,7 @@ function PrayerDetails() {
   const prayerData = useSelector((state: State) => {
     return state.prayers.find((item) => item.id == route.params.id);
   });
+  const commentsLoader = useSelector((state: State) => state.loader.comments);
 
   const comments = commentsData.map((item) => {
     if (item.prayerId == route.params.id) {
@@ -43,13 +41,14 @@ function PrayerDetails() {
   });
 
   function onSubmit() {
-    console.log('clicked add prauer ' + formState.body);
-    dispatch(
-      requestCreateCommentActionCreator({
-        id: route.params.id,
-        body: formState.body,
-      }),
-    );
+    if (formState.body.trim() !== '') {
+      dispatch(
+        requestCreateCommentActionCreator({
+          id: route.params.id,
+          body: formState.body,
+        }),
+      );
+    }
   }
 
   return (
@@ -133,27 +132,31 @@ function PrayerDetails() {
             <Text style={styles.commentsTitle}>COMMENTS</Text>
             <View style={styles.commentsWrapper}>{comments}</View>
           </View>
-          <View style={styles.inputWrapper}>
-            <Form
-              onSubmit={onSubmit}
-              render={({ handleSubmit }) => (
-                <>
-                  <Pressable onPress={handleSubmit}>
-                    <CommentBtn />
-                  </Pressable>
+          {commentsLoader ? (
+            <></>
+          ) : (
+            <View style={styles.inputWrapper}>
+              <Form
+                onSubmit={onSubmit}
+                render={({ handleSubmit }) => (
+                  <>
+                    <Pressable onPress={handleSubmit}>
+                      <CommentBtn />
+                    </Pressable>
 
-                  <Field
-                    name="title"
-                    component={CommentTextInput}
-                    style={styles.commentsInput}
-                    onChangeText={(val: string) => {
-                      setFormState({ body: val });
-                    }}
-                  />
-                </>
-              )}
-            />
-          </View>
+                    <Field
+                      name="title"
+                      component={CommentTextInput}
+                      style={styles.commentsInput}
+                      onChangeText={(val: string) => {
+                        setFormState({ body: val });
+                      }}
+                    />
+                  </>
+                )}
+              />
+            </View>
+          )}
         </View>
       </KeyboardAwareScrollView>
     </ScrollView>

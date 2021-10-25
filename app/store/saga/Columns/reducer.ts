@@ -1,41 +1,44 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import { columns, user, UserSignIn, UserSignUp } from '../../../types';
+import { Columns, User, UserSignIn, UserSignUp } from '../../../types';
 
-const columnsInitialState: columns[] = [
-  {
-    id: 0,
-    title: '',
-    description: '',
-    userId: 0,
-  },
-];
+const columnsInitialState: Columns[] = [];
 
 export const columnsSlice = createSlice({
   name: 'columns',
   initialState: columnsInitialState,
   reducers: {
     requestGetColumns: (state) => {},
-    responseGetColumns: (state, { payload }: PayloadAction<columns[]>) => {
-      console.log('columnsState>>>' + ' ' + payload);
-      // state = payload;
+    responseGetColumns: (state, { payload }: PayloadAction<Columns[]>) => {
       return [...payload];
-      // console.log('stateColumns0 ' + state[0].id);
-      // payload.map((item) => {
-      //   console.log(
-      //     'ID = ' +
-      //       item.id +
-      //       ' ' +
-      //       'title = ' +
-      //       item.title +
-      //       ' ' +
-      //       'desc = ' +
-      //       item.description +
-      //       ' ' +
-      //       'user = ' +
-      //       item.userId,
-      //   );
-      // });
+    },
+    requestCreateColumn: (
+      state,
+      { payload }: PayloadAction<{ title: string }>,
+    ) => {},
+    responseCreateColumn: (state, { payload }: PayloadAction<Columns>) => {
+      const newColumns = [...state, payload];
+      return newColumns;
+    },
+    updateColumnTitle: (
+      state,
+      { payload }: PayloadAction<{ id: number; title: string }>,
+    ) => {
+      if (payload.title.trim()) {
+        const newColumns = state.map((column) => {
+          if (column.id === payload.id) {
+            return { ...column, title: payload.title };
+          }
+          return column;
+        });
+        return newColumns;
+      }
+    },
+    deleteColumn: (state, { payload }: PayloadAction<{ id: number }>) => {
+      let newColumns: Columns[] = state.filter((item) => {
+        return item.id !== payload.id;
+      });
+      return newColumns;
     },
   },
 });
