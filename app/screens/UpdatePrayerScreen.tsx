@@ -17,15 +17,16 @@ function UpdatePrayerScreen() {
   const route = useRoute<UpdatePrayerRouteProps>();
 
   function onSubmit() {
-    console.log('clicked update column ' + formState.title);
-    dispatch(
-      updatePrayerTitleActionCreator({
-        id: route.params.id,
-        title: formState.title,
-      }),
-    );
-    setFormState({ title: '' });
-    navigation.navigate(DASHBOARD, { id: route.params.columnId });
+    if (formState.title.trim() !== '') {
+      dispatch(
+        updatePrayerTitleActionCreator({
+          id: route.params.id,
+          title: formState.title,
+        }),
+      );
+      setFormState({ title: '' });
+      navigation.navigate(DASHBOARD, { id: route.params.columnId });
+    }
   }
 
   return (

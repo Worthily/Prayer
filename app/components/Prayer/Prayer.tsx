@@ -35,7 +35,6 @@ function Prayer(props: {
       text: 'Update',
       backgroundColor: '#BFB393',
       onPress: () => {
-        console.log('update');
         navigation.navigate(UPDATEPRAYER, {
           id: props.id,
           columnId: props.columnId,
@@ -46,7 +45,6 @@ function Prayer(props: {
       text: 'Delete',
       backgroundColor: '#AC5253',
       onPress: () => {
-        console.log('dell');
         dispatch(deletePrayerActionCreator({ id: props.id }));
       },
     },

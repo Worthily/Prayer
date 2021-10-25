@@ -13,16 +13,19 @@ const styles = StyleSheet.create({
     height: 150,
   },
   authTitle: {
+    fontFamily: 'SFUIText-Medium',
     fontSize: 20,
     textAlign: 'center',
     marginBottom: 10,
   },
   authSubTitle: {
+    fontFamily: 'SFUIText-Regular',
     fontSize: 17,
     textAlign: 'center',
     marginBottom: 20,
   },
   goToSignUpBtnWrapper: {
+    fontFamily: 'SFUIText-Regular',
     flexDirection: 'row',
     marginTop: 20,
     marginHorizontal: '10%',
@@ -30,6 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   authGoToSignUpBtn: {
+    fontFamily: 'SFUIText-Regular',
     fontSize: 18,
     marginLeft: 10,
     color: 'blue',

@@ -6,6 +6,7 @@ import {
   setPrayerIsChecked,
   updatePrayer,
 } from '../../../api/Prayers/requests';
+import { setPrayersLoaderActionCreator } from '../Loader/actions';
 import {
   requestCreatePrayerActionCreator,
   responseGetPrayersActionCreator,
@@ -16,17 +17,35 @@ import {
 } from './actions';
 
 export function* getPrayersWorkSaga() {
+  yield put({
+    type: setPrayersLoaderActionCreator.type,
+    payload: {
+      newValue: true,
+    },
+  });
   const { data } = yield call(getPrayers);
   console.log('Prayers>>>' + ' ' + data);
   yield put({
     type: responseGetPrayersActionCreator.type,
     payload: data,
   });
+  yield put({
+    type: setPrayersLoaderActionCreator.type,
+    payload: {
+      newValue: false,
+    },
+  });
 }
 
 export function* createPrayerWorkSaga({
   payload,
 }: ReturnType<typeof requestCreatePrayerActionCreator>) {
+  yield put({
+    type: setPrayersLoaderActionCreator.type,
+    payload: {
+      newValue: true,
+    },
+  });
   const { data } = yield call(
     createPrayer,
     payload.columnId,
@@ -46,14 +65,18 @@ export function* createPrayerWorkSaga({
       },
     });
   } else {
-    console.log('create prayer error');
   }
+  yield put({
+    type: setPrayersLoaderActionCreator.type,
+    payload: {
+      newValue: false,
+    },
+  });
 }
 export function* updatePrayerTitleWorkSaga({
   payload,
 }: ReturnType<typeof updatePrayerTitleActionCreator>) {
   const { data } = yield call(updatePrayer, payload.id, payload.title);
-  console.log('prayers>>>' + ' ' + data);
 }
 
 export function* setPrayerCheckedWorkSaga({
@@ -65,12 +88,10 @@ export function* setPrayerCheckedWorkSaga({
     payload.description,
     payload.checked,
   );
-  console.log('Prayers>>>' + ' ' + data);
 }
 
 export function* deletePrayerWorkSaga({
   payload,
 }: ReturnType<typeof deletePrayerActionCreator>) {
   const { data } = yield call(deletePrayer, payload.id);
-  console.log('Prayers>>>' + ' ' + data);
 }

@@ -16,7 +16,6 @@ function Column(props: { id: number; title: string; onPress(): void }) {
       text: 'Update',
       backgroundColor: '#BFB393',
       onPress: () => {
-        console.log('update');
         navigation.navigate(UPDATECOLUMN, { id: props.id });
       },
     },
@@ -24,7 +23,6 @@ function Column(props: { id: number; title: string; onPress(): void }) {
       text: 'Delete',
       backgroundColor: '#AC5253',
       onPress: () => {
-        console.log('dell');
         dispatch(deleteColumnActionCreator({ id: props.id }));
       },
     },

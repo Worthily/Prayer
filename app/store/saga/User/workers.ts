@@ -11,15 +11,19 @@ import { responseGetColumnsActionCreator } from '../Columns/actions';
 import { getColumnsWorkSaga } from '../Columns/workers';
 import { getPrayersWorkSaga } from '../Prayers/workers';
 import { getCommentsWorkSaga } from '../Comments/workers';
+import { setUserLoaderActionCreator } from '../Loader/actions';
 
 export function* userSignInWorkSaga({
   payload,
 }: ReturnType<typeof requestSignInActionCreator>) {
-  console.log('payload >>> ' + payload.email + ' ' + payload.password);
+  yield put({
+    type: setUserLoaderActionCreator.type,
+    payload: {
+      newValue: true,
+    },
+  });
   const { data } = yield call(signIn, payload.email, payload.password);
-  console.log(data);
   if (data.name === 'EntityNotFound') {
-    console.log('Entity error');
     yield put({
       type: onErrorActionCreator.type,
       payload: {
@@ -40,6 +44,12 @@ export function* userSignInWorkSaga({
         errorText: '',
       },
     });
+    yield put({
+      type: setUserLoaderActionCreator.type,
+      payload: {
+        newValue: false,
+      },
+    });
     yield getColumnsWorkSaga();
     yield getPrayersWorkSaga();
     yield getCommentsWorkSaga();
@@ -56,7 +66,6 @@ export function* userSignUpWorkSaga({
     payload.password,
   );
   if (data.severity === 'ERROR') {
-    console.log('severity error');
     yield put({
       type: onErrorActionCreator.type,
       payload: {

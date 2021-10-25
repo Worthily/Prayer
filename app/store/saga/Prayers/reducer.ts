@@ -9,7 +9,6 @@ export const prayersSlice = createSlice({
   reducers: {
     requestGetPrayers: (state) => {},
     responseGetPrayers: (state, { payload }: PayloadAction<Prayers[]>) => {
-      // console.log('columnsState>>>' + ' ' + payload);
       return [...payload];
     },
     requestCreatePrayer: (
@@ -21,9 +20,7 @@ export const prayersSlice = createSlice({
         title: string;
         description: string;
       }>,
-    ) => {
-      console.log('create prayer req');
-    },
+    ) => {},
     responseCreatePrayer: (
       state,
       {
@@ -36,7 +33,6 @@ export const prayersSlice = createSlice({
         checked: boolean;
       }>,
     ) => {
-      console.log('create prayer resp');
       const newPrayer: Prayers = {
         id: payload.id,
         title: payload.title,

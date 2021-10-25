@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   screenTitle: {
+    fontFamily: 'SFUIText-Medium',
     marginVertical: 22,
     fontSize: 17,
     lineHeight: 20,

@@ -17,15 +17,16 @@ function UpdateColumnScreen() {
   const route = useRoute<UpdateColumnRouteProps>();
 
   function onSubmit() {
-    console.log('clicked update column ' + formState.title);
-    dispatch(
-      updateColumnTitleActionCreator({
-        id: route.params.id,
-        title: formState.title,
-      }),
-    );
-    setFormState({ title: '' });
-    navigation.navigate(MYDESK);
+    if (formState.title.trim() !== '') {
+      dispatch(
+        updateColumnTitleActionCreator({
+          id: route.params.id,
+          title: formState.title,
+        }),
+      );
+      setFormState({ title: '' });
+      navigation.navigate(MYDESK);
+    }
   }
 
   return (

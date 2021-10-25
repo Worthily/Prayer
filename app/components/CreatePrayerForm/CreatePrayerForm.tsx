@@ -12,15 +12,16 @@ function CreatePrayerForm(props: { columnId: number }) {
   const [formState, setFormState] = useState({ title: '' });
 
   function onSubmit() {
-    console.log('clicked add prauer ' + formState.title + ' ' + props.columnId);
-    dispatch(
-      requestCreatePrayerActionCreator({
-        columnId: props.columnId,
-        title: formState.title,
-        description: '',
-      }),
-    );
-    setFormState({ title: '' });
+    if (formState.title.trim() !== '') {
+      dispatch(
+        requestCreatePrayerActionCreator({
+          columnId: props.columnId,
+          title: formState.title,
+          description: '',
+        }),
+      );
+      setFormState({ title: '' });
+    }
   }
 
   return (

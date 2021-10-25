@@ -15,33 +15,31 @@ function DashboardScreen() {
   const dispatch = useDispatch();
   const [tabToShow, setTabToShow] = useState('My prayers');
   const prayersData = useSelector((state: State) => state.prayers);
+  const prayersLoader = useSelector((state: State) => state.loader.prayers);
   const route = useRoute<DashboardRouteProps>();
-  console.log('routeID>>> ' + route.params.id);
-
-  const checkedPrayers: (Prayers | undefined)[] = prayersData.map((item) => {
-    if (item.checked && item.columnId == route.params.id) {
-      return item;
-    }
+  const column = useSelector((state: State) => {
+    return state.columns.find((item) => {
+      return route.params.id == item.id;
+    });
   });
-  const uncheckedPrayers: (Prayers | undefined)[] = prayersData.map((item) => {
-    if (!item.checked && item.columnId == route.params.id) {
-      return item;
-    }
-  });
+  let dashboardBody: JSX.Element = <></>;
+  if (!prayersLoader) {
+    const checkedPrayers: (Prayers | undefined)[] = prayersData.map((item) => {
+      if (item.checked && item.columnId == route.params.id) {
+        return item;
+      }
+    });
+    const uncheckedPrayers: (Prayers | undefined)[] = prayersData.map(
+      (item) => {
+        if (!item.checked && item.columnId == route.params.id) {
+          return item;
+        }
+      },
+    );
 
-  let dashboardBody = (
-    <View>
-      <CreatePrayerForm columnId={route.params.id} />
-      <PrayerList
-        columnId={route.params.id}
-        checkedPrayers={checkedPrayers}
-        uncheckedPrayers={uncheckedPrayers}
-      />
-    </View>
-  );
-  if (tabToShow == 'subscribed') {
     dashboardBody = (
       <View>
+        <CreatePrayerForm columnId={route.params.id} />
         <PrayerList
           columnId={route.params.id}
           checkedPrayers={checkedPrayers}
@@ -49,13 +47,24 @@ function DashboardScreen() {
         />
       </View>
     );
+    if (tabToShow == 'subscribed') {
+      dashboardBody = (
+        <View>
+          <PrayerList
+            columnId={route.params.id}
+            checkedPrayers={checkedPrayers}
+            uncheckedPrayers={uncheckedPrayers}
+          />
+        </View>
+      );
+    }
   }
 
   return (
     <ScrollView style={styles.contentWrapper}>
       <View style={styles.header}>
         <View style={styles.titleWrapper}>
-          <Text style={styles.screenTitle}>To Do</Text>
+          <Text style={styles.screenTitle}>{column?.title}</Text>
           <Pressable
             style={styles.settingsBtn}
             onPress={() => {
@@ -73,7 +82,6 @@ function DashboardScreen() {
             }
             onPress={() => {
               setTabToShow('My prayers');
-              console.log('My prs');
             }}>
             <Text
               style={
@@ -92,7 +100,6 @@ function DashboardScreen() {
             }
             onPress={() => {
               setTabToShow('subscribed');
-              console.log('subs');
             }}>
             <Text
               style={
@@ -105,7 +112,7 @@ function DashboardScreen() {
           </Pressable>
         </View>
       </View>
-      {dashboardBody}
+      {prayersLoader ? <Text>Loading...</Text> : dashboardBody}
     </ScrollView>
   );
 }

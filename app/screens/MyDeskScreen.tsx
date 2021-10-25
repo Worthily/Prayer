@@ -12,6 +12,7 @@ import { DASHBOARD, CREATECOLUMN } from '../navigations/constants';
 function MyDeskScreen() {
   const navigation = useNavigation<authScreenProp>();
   const columnsData = useSelector((state: State) => state.columns);
+  const columnsLoader = useSelector((state: State) => state.loader.columns);
 
   const columns: JSX.Element[] = columnsData.map((item) => {
     return (
@@ -37,7 +38,9 @@ function MyDeskScreen() {
           <SvgImg width="16" height="16" />
         </Pressable>
       </View>
-      <View style={styles.columnsWrapper}>{columns}</View>
+      <View style={styles.columnsWrapper}>
+        {columnsLoader ? <></> : columns}
+      </View>
     </View>
   );
 }

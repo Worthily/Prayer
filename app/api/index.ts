@@ -14,7 +14,6 @@ export const api = axios.create(axiosCfg);
 api.interceptors.request.use((axiosCfg) => {
   try {
     const token = store.getState().user.token;
-    console.log('tokenA>>>' + ' ' + token);
     axiosCfg.headers!.Authorization = `Bearer ${token}`;
     return axiosCfg;
   } catch {

@@ -10,7 +10,6 @@ export const columnsSlice = createSlice({
   reducers: {
     requestGetColumns: (state) => {},
     responseGetColumns: (state, { payload }: PayloadAction<Columns[]>) => {
-      console.log('columnsState>>>' + ' ' + payload);
       return [...payload];
     },
     requestCreateColumn: (

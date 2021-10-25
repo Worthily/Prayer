@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   createColumnScreenTitle: {
+    fontFamily: 'SFUIText-Medium',
     marginTop: 20,
     fontSize: 20,
     marginBottom: 20,
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   createColumnBtnText: {
+    fontFamily: 'SFUIText-Regular',
     color: '#ffffff',
   },
 });

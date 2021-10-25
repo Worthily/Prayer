@@ -24,6 +24,7 @@ export type State = {
   columns: Columns[];
   prayers: Prayers[];
   comments: Comments[];
+  loader: Loader;
 };
 
 export type DashboardRouteProps = RouteProp<
@@ -87,4 +88,11 @@ export type Comments = {
   created: string;
   prayerId: number;
   userId: number;
+};
+
+export type Loader = {
+  user: boolean;
+  columns: boolean;
+  prayers: boolean;
+  comments: boolean;
 };

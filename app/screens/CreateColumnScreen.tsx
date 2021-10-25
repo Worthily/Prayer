@@ -16,14 +16,15 @@ function CreateColumnScreen() {
   const [formState, setFormState] = useState({ title: '' });
 
   function onSubmit() {
-    console.log('clicked add prauer ' + formState.title);
-    dispatch(
-      requestCreateColumnActionCreator({
-        title: formState.title,
-      }),
-    );
-    setFormState({ title: '' });
-    navigation.navigate(MYDESK);
+    if (formState.title.trim() !== '') {
+      dispatch(
+        requestCreateColumnActionCreator({
+          title: formState.title,
+        }),
+      );
+      setFormState({ title: '' });
+      navigation.navigate(MYDESK);
+    }
   }
 
   return (
